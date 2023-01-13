@@ -1,5 +1,6 @@
 // use approx crate to solve the problem of floating point comparison
 use approx::assert_abs_diff_eq;
+use nalgebra::Matrix3;
 use ndarray::{arr1, arr2, Array, Array1};
 
 fn main() {
@@ -49,4 +50,14 @@ fn main() {
     let w = &c + &d;
     // TODO: fix error
     // assert_abs_diff_eq!(z, Array::from(vec![6., 6., 6., 6., 6.]));
+
+    /******************
+     * INVERT A MATRIX
+     ******************/
+    let m1 = Matrix3::new(2.0, 1.0, 1.0, 3.0, 2.0, 1.0, 2.0, 1.0, 2.0);
+    println!("m1 = {}", m1);
+    match m1.try_inverse() {
+        Some(v) => println!("m1^-1 = {}", v),
+        None => println!("m1 is not invertible"),
+    };
 }
