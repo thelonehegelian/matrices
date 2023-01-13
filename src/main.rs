@@ -2,6 +2,9 @@
 use approx::assert_abs_diff_eq;
 use nalgebra::Matrix3;
 use ndarray::{arr1, arr2, Array, Array1};
+extern crate nalgebra;
+use nalgebra::DMatrix;
+use serde_json;
 
 fn main() {
     // a 2d array with shape (2, 3)
@@ -60,4 +63,17 @@ fn main() {
         Some(v) => println!("m1^-1 = {}", v),
         None => println!("m1 is not invertible"),
     };
+
+    /**********************************************
+     * SERIALIZATION AND DESERIALIZATION OF MATRIX
+     **********************************************/
+
+    let row_slice: Vec<i32> = (1..5001).collect();
+    // Dmatrix from row slice
+    let matrix = DMatrix::from_row_slice(100, 50, &row_slice);
+    // TODO : Fix errors
+    // serialize matrix
+    // let serialized_matrix = serde_json::to_string(&matrix).unwrap();
+    // // deserialize matrix
+    // let deserialized_matrix: DMatrix<i32> = serde_json::from_str(&serialized_matrix).unwrap();
 }
